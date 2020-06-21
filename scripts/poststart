@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+sleep 1
+
+START_TASKS_COUNT=$(ps aux | grep -E "arc sandbox|webpack --watch" | grep -v grep | wc -l  | tr -d '[:space:]')
+
+if [ "$START_TASKS_COUNT" != "0" ]; then
+  echo "\"start\"-task didn't finish completely. [$START_TASKS_COUNT]"
+fi

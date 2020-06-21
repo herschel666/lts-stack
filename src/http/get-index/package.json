@@ -1,0 +1,7 @@
+{
+  "name": "@lts-stack/get-index",
+  "private": true,
+  "dependencies": {
+    "@architect/functions": "3.12.1"
+  }
+}

@@ -1,0 +1,19 @@
+const arc = require('@architect/functions');
+
+module.exports = (title, body) => /* html */ `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>${title} | <%= siteTitle %></title>
+      <% htmlWebpackPlugin.files.css.forEach((file) => { %>
+        <link href="${arc.http.helpers.static('<%= file.replace('/dist', '') %>')}" rel="stylesheet" />
+      <% }) %>
+      <% htmlWebpackPlugin.files.js.forEach((file) => { %>
+        <script src="${arc.http.helpers.static('<%= file.replace('/dist', '') %>')}" defer></script>
+      <% }) %>
+    </head>
+    <body>
+      ${body}
+    </body>
+  </html>`;
