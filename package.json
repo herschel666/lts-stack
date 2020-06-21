@@ -15,8 +15,8 @@
     "lint:assets": "eslint --fix ./assets/**/*.ts",
     "lint:server": "eslint --fix ./server/**/*.{ts,tsx}",
     "lint:util": "eslint --fix ./util/**/*.ts",
-    "lint:webpack": "npx eslint --fix webpack.config.js",
-    "lint:all": "npm-run-all -l -p lint:assets lint:server lint:util lint:webpack",
+    "lint:js": "npx eslint --fix *.js",
+    "lint:all": "npm-run-all -l -p lint:assets lint:server lint:util lint:js",
     "lint": "npm-run-all type-check lint:all",
     "fmt": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --write \"**/**.{js,md,css,ts,tsx}\"",
     "precommit": "lint-staged"
