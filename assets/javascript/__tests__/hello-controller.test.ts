@@ -10,7 +10,7 @@ const raf = () => new Promise((resolve) => requestAnimationFrame(resolve));
 const getDOM = async (): Promise<ReturnType<typeof getQueriesForElement>> => {
   const container = document.createElement('div');
   const boundQueries = getQueriesForElement(container);
-  container.innerHTML = h(StimulusExample);
+  container.innerHTML = h(StimulusExample, null);
   const application = await Application.start(container);
 
   application.register('hello', HelloController);
