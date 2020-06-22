@@ -20,7 +20,8 @@
   },
   "rules": {
     "react/prop-types": "off",
-    "react/no-unknown-property": [2, { "ignore": ["class"] }]
+    "react/jsx-key": "off",
+    "react/no-unknown-property": [2, { "ignore": ["class", "for", "datetime"] }]
   },
   "settings": {
     "react": {
