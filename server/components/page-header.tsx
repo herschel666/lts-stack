@@ -23,6 +23,9 @@ export const PageHeader: HC = () => (
       <a href="/about" class={navItem}>
         About
       </a>
+      <a href="/guestbook" class={navItem}>
+        Guestbook
+      </a>
       <a href="https://github.com/herschel666/lts-stack" class={navItem}>
         Github
       </a>

@@ -10,4 +10,5 @@ folder dist
 @http
 get /
 get /about
+get /guestbook
 

@@ -34,8 +34,7 @@ const Body = () => (
 export const handler = async (): Promise<Response> => {
   return {
     headers: {
-      'cache-control':
-        'no-cache, no-store, must-revalidate, max-age=0, s-maxage=0',
+      'cache-control': 'no-cache, no-store, must-revalidate, max-age=0',
       'content-type': 'text/html; charset=utf8',
     },
     body: page('Welcome', <Body />),

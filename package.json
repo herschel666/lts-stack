@@ -27,6 +27,7 @@
     "@architect/architect": "6.4.1",
     "@architect/sandbox": "1.12.2",
     "classnames": "2.2.6",
+    "date-fns": "2.14.0",
     "stimulus": "1.1.1",
     "tailwindcss": "1.4.6",
     "turbolinks": "5.2.0"
@@ -37,6 +38,7 @@
     "@babel/preset-env": "7.10.2",
     "@testing-library/dom": "7.16.2",
     "@types/classnames": "2.2.10",
+    "@types/date-fns": "2.6.0",
     "@types/jest": "26.0.0",
     "@types/turbolinks": "5.2.0",
     "@types/webpack-env": "1.15.2",
