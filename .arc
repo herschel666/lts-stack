@@ -1,5 +1,5 @@
 @app
-modern-stack
+lts-stack
 
 @aws
 region eu-central-1
