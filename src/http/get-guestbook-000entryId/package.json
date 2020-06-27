@@ -1,0 +1,7 @@
+{
+  "name": "@lts-stack/get-guestbook-000entryId",
+  "private": true,
+  "dependencies": {
+    "@architect/functions": "3.12.1"
+  }
+}

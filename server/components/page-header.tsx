@@ -1,7 +1,6 @@
-import h from 'vhtml';
+import h, { HC } from 'vhtml';
 import classNames from 'classnames';
 
-import type { HC } from '../typings/hc.type';
 import { PageTitle } from './page-title';
 
 const wrap = classNames('border-b', 'mb-16', 'p-8', 'flex', 'justify-between');
@@ -22,6 +21,9 @@ export const PageHeader: HC = () => (
       </a>
       <a href="/about" class={navItem}>
         About
+      </a>
+      <a href="/guestbook" class={navItem}>
+        Guestbook
       </a>
       <a href="https://github.com/herschel666/lts-stack" class={navItem}>
         Github

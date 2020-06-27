@@ -2,7 +2,7 @@ import { handler } from '.';
 
 describe('handler()', () => {
   it('should return a valid response', async () => {
-    const { headers, body } = await handler();
+    const { headers, body } = await handler({ pathParameters: null });
     const headline =
       'A modern stack consisting of Lambda, Turbolinks &amp; StimulusJS.';
 
