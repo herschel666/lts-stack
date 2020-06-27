@@ -29,7 +29,7 @@ components, executed in a JSDOM env, and those for the Lambda handlers, executed
 
 These tests leverage the [`@testing-library/dom`](https://npm.im/@testing-library/dom) and render
 the accompanying HTML into the JSDOM. Have a look at
-[`assets/javascript/__tests__/hello-controller.test.ts`](assets/javascript/__tests__/hello-controller.test.ts)
+[`assets/javascript/__tests__/guestbook-form-controller.test.ts`](assets/javascript/__tests__/guestbook-form-controller.test.ts)
 to get an idea.
 
 ### Testing Lambda handler
