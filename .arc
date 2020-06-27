@@ -12,3 +12,14 @@ get /
 get /about
 get /guestbook
 
+
+@tables
+lts-stack
+  PK *String
+  SK **String
+  _ttl TTL
+
+@indexes
+lts-stack
+  GSI1PK *String
+  GSI1SK **String
