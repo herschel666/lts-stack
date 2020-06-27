@@ -76,7 +76,17 @@ const assetsConfig = {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
-              presets: ['@babel/preset-env'],
+              sourceType: 'unambiguous',
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    useBuiltIns: 'usage',
+                    targets: { browsers: '> 5% and last 2 major versions' },
+                    corejs: 3,
+                  },
+                ],
+              ],
             },
           },
           'ts-loader',
