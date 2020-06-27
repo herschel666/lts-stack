@@ -1,12 +1,15 @@
-import h from 'vhtml';
+import h, { HC } from 'vhtml';
 import classNames from 'classnames';
 
-import type { HC } from '../typings/hc.type';
+type Heading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
 interface Props {
   text: string;
+  type?: Heading;
 }
 
 const classes = classNames('text-5xl', 'text-yellow-900');
 
-export const H1: HC<Props> = ({ text }) => <h1 className={classes}>{text}</h1>;
+export const Heading: HC<Props> = ({ text, type: H = 'h1' }) => (
+  <H className={classes}>{text}</H>
+);

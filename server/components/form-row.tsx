@@ -1,7 +1,5 @@
-import h from 'vhtml';
+import h, { HC } from 'vhtml';
 import classNames from 'classnames';
-
-import type { HC } from '../typings/hc.type';
 
 interface Props {
   class?: string;

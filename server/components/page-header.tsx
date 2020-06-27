@@ -1,7 +1,6 @@
-import h from 'vhtml';
+import h, { HC } from 'vhtml';
 import classNames from 'classnames';
 
-import type { HC } from '../typings/hc.type';
 import { PageTitle } from './page-title';
 
 const wrap = classNames('border-b', 'mb-16', 'p-8', 'flex', 'justify-between');

@@ -5,38 +5,70 @@ import arc from '@architect/functions';
 import { importPage } from '../../util/import-page';
 import { Page } from '../../components/page';
 import { PageHeader } from '../../components/page-header';
-import { H1 } from '../../components/heading';
-import { StimulusExample } from '../../components/stimulus-example';
+import { Heading } from '../../components/heading';
 
 import ltsStackLogo from '../../../assets/images/lts-stack-logo.png';
 
+interface Request {
+  pathParameters: null | {
+    proxy: string;
+  };
+}
+
 interface Response {
+  statusCode?: 404;
   headers: { [header: string]: string };
   body: ReturnType<typeof page>;
 }
 
 const page = importPage();
 
-const image = classNames('w-1/3');
+const image = classNames('w-1/3', 'mb-12');
+const addendum = classNames(
+  'mt-16',
+  'text-xl',
+  'text-gray-800',
+  'tracking-wider'
+);
 
 const Body = () => (
   <Page>
     <PageHeader />
     <img src={arc.http.helpers.static(ltsStackLogo)} alt="" class={image} />
     <div>
-      <H1 text="A modern stack consisting of Lambda, Turbolinks &amp; StimulusJS." />
-      <p>…the &quot;T&quot; is also for Typescript &amp; Tailwind.</p>
-      <StimulusExample />
+      <Heading text="A modern stack consisting of Lambda, Turbolinks &amp; StimulusJS." />
+      <p class={addendum}>
+        &hellip;the &quot;T&quot; is also for Typescript &amp; Tailwind.
+      </p>
     </div>
   </Page>
 );
 
-export const handler = async (): Promise<Response> => {
+const NotFound = () => (
+  <Page>
+    <PageHeader />
+    <div>
+      <Heading text="Not found." />
+    </div>
+  </Page>
+);
+
+export const handler = async (req: Request): Promise<Response> => {
+  const headers = {
+    'cache-control': 'no-cache, no-store, must-revalidate, max-age=0',
+    'content-type': 'text/html; charset=utf8',
+  };
+
+  if (req.pathParameters && req.pathParameters.proxy) {
+    return {
+      statusCode: 404,
+      body: page('Not found', <NotFound />),
+      headers,
+    };
+  }
+
   return {
-    headers: {
-      'cache-control': 'no-cache, no-store, must-revalidate, max-age=0',
-      'content-type': 'text/html; charset=utf8',
-    },
+    headers,
     body: page('Welcome', <Body />),
   };
 };

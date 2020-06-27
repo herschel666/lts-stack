@@ -16,5 +16,10 @@ declare module 'vhtml' {
     ...children: ComponentChildren[]
   ): string;
 
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  export type HC<T extends object = Record<string, unknown>> = (
+    props: T & { children?: string }
+  ) => ReturnType<typeof vhtml>;
+
   export default vhtml;
 }

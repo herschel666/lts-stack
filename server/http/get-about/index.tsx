@@ -2,7 +2,7 @@ import h from 'vhtml';
 import { importPage } from '../../util/import-page';
 import { Page } from '../../components/page';
 import { PageHeader } from '../../components/page-header';
-import { H1 } from '../../components/heading';
+import { Heading } from '../../components/heading';
 
 interface Response {
   headers: { [header: string]: string };
@@ -15,7 +15,7 @@ const Body = () => (
   <Page>
     <PageHeader />
     <div>
-      <H1 text="About the LTSstack" />
+      <Heading text="About the LTSstack" />
       <p>
         Labore Lorem veniam consequat aute veniam excepteur eiusmod anim non
         sint eiusmod qui eu fugiat.

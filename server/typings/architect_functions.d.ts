@@ -23,6 +23,8 @@ declare module '@architect/functions' {
   interface Http {
     helpers: {
       static(filename: string): string;
+      url(pathname: string): string;
+      bodyParser<T = Record<string, unknown>>(req: Record<string, unknown>): T;
     };
   }
   interface Arc {
