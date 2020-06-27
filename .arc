@@ -12,6 +12,7 @@ get /
 get /about
 get /guestbook
 
+post /guestbook
 
 @tables
 lts-stack

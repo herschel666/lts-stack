@@ -1,13 +1,14 @@
-import h from 'vhtml';
+import h, { HC } from 'vhtml';
 import classNames from 'classnames';
 
-import type { HC } from '../typings/hc.type';
 import { Fragment } from './fragment';
 
 interface Props {
   label: string;
   placeholder: string;
   id: string;
+  ['data-target']?: string;
+  required?: boolean;
 }
 type OuterProps = Pick<Props, 'id' | 'label'>;
 
@@ -23,7 +24,13 @@ const Outer: HC<OuterProps> = ({ children, id, label: labelText }) => (
   </Fragment>
 );
 
-export const TextInput: HC<Props> = ({ id, label: labelText, placeholder }) => (
+export const TextInput: HC<Props> = ({
+  id,
+  label: labelText,
+  placeholder,
+  ['data-target']: target,
+  required,
+}) => (
   <Outer id={id} label={labelText}>
     <input
       type="text"
@@ -31,11 +38,19 @@ export const TextInput: HC<Props> = ({ id, label: labelText, placeholder }) => (
       name={id}
       placeholder={placeholder}
       class={input}
+      data-target={target}
+      required={required}
     />
   </Outer>
 );
 
-export const TextArea: HC<Props> = ({ id, label: labelText, placeholder }) => (
+export const TextArea: HC<Props> = ({
+  id,
+  label: labelText,
+  placeholder,
+  ['data-target']: target,
+  required,
+}) => (
   <Outer id={id} label={labelText}>
     <textarea
       id={id}
@@ -43,6 +58,8 @@ export const TextArea: HC<Props> = ({ id, label: labelText, placeholder }) => (
       placeholder={placeholder}
       class={input}
       rows="8"
+      data-target={target}
+      required={required}
     ></textarea>
   </Outer>
 );

@@ -1,7 +1,9 @@
-import h from 'vhtml';
+import h, { HC } from 'vhtml';
 import classNames from 'classnames';
 
-import type { HC } from '../typings/hc.type';
+interface Props {
+  ['data-target']?: string;
+}
 
 const button = classNames(
   'py-2',
@@ -11,6 +13,8 @@ const button = classNames(
   'focus:bg-gray-300'
 );
 
-export const Button: HC = ({ children }) => (
-  <button class={button}>{children}</button>
+export const Button: HC<Props> = ({ ['data-target']: target, children }) => (
+  <button class={button} data-target={target}>
+    {children}
+  </button>
 );
