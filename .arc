@@ -11,6 +11,7 @@ folder dist
 get /
 get /about
 get /guestbook
+get /guestbook/:entryId
 
 post /guestbook
 
