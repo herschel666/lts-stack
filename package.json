@@ -40,7 +40,7 @@
     "@testing-library/dom": "7.16.2",
     "@types/classnames": "2.2.10",
     "@types/date-fns": "2.6.0",
-    "@types/jest": "26.0.0",
+    "@types/jest": "26.0.3",
     "@types/turbolinks": "5.2.0",
     "@types/webpack-env": "1.15.2",
     "@typescript-eslint/eslint-plugin": "3.1.0",
