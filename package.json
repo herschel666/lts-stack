@@ -27,7 +27,7 @@
     "@architect/architect": "6.4.1",
     "@architect/sandbox": "1.12.2",
     "classnames": "2.2.6",
-    "date-fns": "2.14.0",
+    "date-fns": "2.15.0",
     "nanoid": "3.1.10",
     "stimulus": "1.1.1",
     "tailwindcss": "1.4.6",
