@@ -48,9 +48,11 @@ const assetsConfig = {
     publicPath: '/',
   },
   module: {
+    noParse: [/\/\.test\.js$/],
     rules: [
       {
         test: /\.css$/i,
+        include: ASSETS,
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -70,7 +72,7 @@ const assetsConfig = {
       },
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
+        include: ASSETS,
         use: [
           {
             loader: 'babel-loader',
@@ -89,7 +91,16 @@ const assetsConfig = {
               ],
             },
           },
-          'ts-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              compilerOptions: {
+                sourceMap: true,
+                module: 'esnext',
+              },
+            },
+          },
         ],
       },
       urlLoader,
@@ -132,6 +143,7 @@ const getServerFileConfig = (filepath) => {
       rules: [
         {
           test: /\.tsx?$/,
+          include: SERVER,
           use: [
             {
               loader: 'ts-loader',
