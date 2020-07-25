@@ -46,9 +46,6 @@ export const Body: HC<Props> = ({ entries }) => (
         data-target="guestbook-form.form"
       >
         <div data-target="guestbook-form.error" hidden></div>
-        <div data-target="guestbook-form.success" hidden>
-          Successfully submitted your message.
-        </div>
         <Fieldset legend="Write a message">
           <FormRow>
             <TextInput
@@ -56,6 +53,7 @@ export const Body: HC<Props> = ({ entries }) => (
               id="author"
               placeholder="Enter your name&hellip;"
               data-target="guestbook-form.author"
+              data-action="input->guestbook-form#changeAuthor"
               required={true}
             />
           </FormRow>
@@ -65,6 +63,7 @@ export const Body: HC<Props> = ({ entries }) => (
               id="message"
               placeholder="Enter your message&hellip;"
               data-target="guestbook-form.message"
+              data-action="input->guestbook-form#changeMessage"
               required={true}
             />
           </FormRow>

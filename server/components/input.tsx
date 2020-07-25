@@ -8,6 +8,7 @@ interface Props {
   placeholder: string;
   id: string;
   ['data-target']?: string;
+  ['data-action']?: string;
   required?: boolean;
 }
 type OuterProps = Pick<Props, 'id' | 'label'>;
@@ -29,6 +30,7 @@ export const TextInput: HC<Props> = ({
   label: labelText,
   placeholder,
   ['data-target']: target,
+  ['data-action']: action,
   required,
 }) => (
   <Outer id={id} label={labelText}>
@@ -39,6 +41,7 @@ export const TextInput: HC<Props> = ({
       placeholder={placeholder}
       class={input}
       data-target={target}
+      data-action={action}
       required={required}
     />
   </Outer>
@@ -49,6 +52,7 @@ export const TextArea: HC<Props> = ({
   label: labelText,
   placeholder,
   ['data-target']: target,
+  ['data-action']: action,
   required,
 }) => (
   <Outer id={id} label={labelText}>
@@ -59,6 +63,7 @@ export const TextArea: HC<Props> = ({
       class={input}
       rows="8"
       data-target={target}
+      data-action={action}
       required={required}
     ></textarea>
   </Outer>
