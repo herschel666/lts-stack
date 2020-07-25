@@ -1,132 +1,186 @@
 import { Controller } from 'stimulus';
+import type { Context as StimulusCtx } from 'stimulus';
+import { createMachine, interpret, assign } from 'xstate';
+import type {
+  Interpreter,
+  StateNode,
+  StateFrom,
+  DoneInvokeEvent,
+} from 'xstate';
 import Turbolinks from 'turbolinks';
 
-enum Status {
-  Ok = 'Ok',
-  Invalid = 'Invalid',
-  Error = 'Error',
+interface Context {
+  readonly url?: string;
+  readonly author: string;
+  readonly message: string;
+  readonly feedback: string;
 }
 
-interface PostResult {
-  status: Status;
-  response: null | { entryId?: string };
-}
+type ChangeAuthorEvent = { type: 'CHANGE_AUTHOR'; value: string };
+type ChangeMessageEvent = { type: 'CHANGE_MESSAGE'; value: string };
+type Events =
+  | ChangeAuthorEvent
+  | ChangeMessageEvent
+  | DoneInvokeEvent<Error>
+  | { type: 'VALIDATE' };
 
-const getStatus = (statusCode: number): Status => {
-  switch (statusCode) {
-    case 200:
-      return Status.Ok;
-    case 400:
-      return Status.Invalid;
-    default:
-      return Status.Error;
+type StateSchema =
+  | { value: 'idle'; context: Context }
+  | { value: 'valid'; context: Context };
+
+const machine = createMachine<Context, Events, StateSchema>(
+  {
+    id: 'guestbook-form',
+    context: {
+      author: '',
+      message: '',
+      feedback: '',
+    },
+    initial: 'idle',
+    states: {
+      idle: {
+        on: {
+          CHANGE_AUTHOR: {
+            actions: 'assignAuthor',
+          },
+          CHANGE_MESSAGE: {
+            actions: 'assignMessage',
+          },
+          VALIDATE: [
+            {
+              cond: 'isValid',
+              target: 'valid',
+              actions: 'clearFeedback',
+            },
+            {
+              cond: 'isInvalid',
+              target: 'idle',
+              actions: 'setInvalidFeedback',
+            },
+          ],
+        },
+      },
+      valid: {
+        invoke: {
+          id: 'submit-form',
+          src: 'submitForm',
+          onDone: 'idle',
+          onError: [
+            {
+              target: 'idle',
+              cond: 'invalidRequest',
+              actions: 'setInvalidFeedback',
+            },
+            {
+              target: 'idle',
+              cond: 'failedRequest',
+              actions: 'setErrorFeedback',
+            },
+          ],
+        },
+      },
+    },
+  },
+  {
+    actions: {
+      assignAuthor: assign<Context>({
+        author: (_, { value }: ChangeAuthorEvent) => value,
+      }),
+      assignMessage: assign<Context>({
+        message: (_, { value }: ChangeMessageEvent) => value,
+      }),
+      clearFeedback: assign({ feedback: '' }),
+      setInvalidFeedback: assign({
+        feedback: 'Please fill all the fields.',
+      }),
+      setErrorFeedback: assign({
+        feedback: 'Something went wrong.',
+      }),
+    },
+    guards: {
+      isValid: (ctx: Context): boolean =>
+        Boolean(ctx.author.length && ctx.message.length),
+      isInvalid: (ctx: Context): boolean =>
+        !ctx.author.length && !ctx.message.length,
+      invalidRequest: (_, event: DoneInvokeEvent<Error>) =>
+        event.data.message === '400',
+      failedRequest: (_, event: DoneInvokeEvent<Error>) =>
+        event.data.message !== '400',
+    },
+    services: {
+      submitForm: ({ url, author, message }: Context) => async ():
+        | Promise<void>
+        | never => {
+        const createdAt = new Date().toISOString();
+        const response = await fetch(url, {
+          method: 'post',
+          body: JSON.stringify({ author, message, createdAt }),
+        });
+
+        if (response.status !== 200) {
+          throw new Error(String(response.status));
+        }
+
+        const { entryId } = await response.json();
+        const hash = entryId ? `#entry-${entryId}` : '';
+        Turbolinks.clearCache();
+        Turbolinks.visit(`./guestbook${hash}`);
+      },
+    },
   }
-};
+);
 
 export default class extends Controller {
+  private fsmService: Interpreter<Context, StateSchema, Events>;
   formTarget: HTMLFormElement;
-  formTargets: HTMLDivElement[];
-  hasFormTarget: boolean;
   errorTarget: HTMLDivElement;
-  errorTargets: HTMLDivElement[];
   hasErrorTarget: boolean;
-  successTarget: HTMLDivElement;
-  successTargets: HTMLDivElement[];
-  hasSuccessTarget: boolean;
-  authorTarget: HTMLInputElement;
-  authorTargets: HTMLInputElement[];
-  hasAuthorTarget: boolean;
-  messageTarget: HTMLTextAreaElement;
-  messageTargets: HTMLTextAreaElement[];
-  hasMessageTarget: boolean;
-  submitTarget: HTMLButtonElement;
-  submitTargets: HTMLButtonElement[];
-  hasSubmitTarget: boolean;
 
-  static targets = ['form', 'error', 'success', 'author', 'message', 'submit'];
+  static targets = ['form', 'error'];
 
-  isValid(): boolean {
-    return Boolean(this.author && this.message);
-  }
+  public constructor(context: StimulusCtx) {
+    super(context);
 
-  showError(message: string): void {
-    this.hideSuccess();
-    this.errorTarget.textContent = message;
-    this.errorTarget.removeAttribute('hidden');
-  }
-
-  hideError(): void {
-    this.errorTarget.textContent = '';
-    this.errorTarget.setAttribute('hidden', 'true');
-  }
-
-  showSuccess(): void {
-    this.hideError();
-    this.successTarget.removeAttribute('hidden');
-  }
-
-  hideSuccess(): void {
-    this.successTarget.setAttribute('hidden', 'true');
-  }
-
-  setDisableForm(value: boolean): void {
-    this.authorTarget.disabled = value;
-    this.messageTarget.disabled = value;
-    this.submitTarget.disabled = value;
-  }
-
-  async post(url: string): Promise<PostResult> {
-    const createdAt = new Date().toISOString();
-    const response = await fetch(url, {
-      method: 'post',
-      body: JSON.stringify({
-        author: this.author,
-        message: this.message,
-        createdAt: createdAt,
-      }),
+    const formMachine: StateNode<
+      Context,
+      StateSchema,
+      Events
+    > = machine.withContext({
+      ...machine.context,
+      url: this.formTarget.action,
     });
-    const json = response.status === 200 ? await response.json() : null;
-    return {
-      status: getStatus(response.status),
-      response: json,
-    };
+    this.fsmService = interpret<Context, StateSchema, Events>(formMachine);
+    this.fsmService.subscribe(this.setFeedback.bind(this));
+    this.fsmService.start();
   }
 
-  async submit(event: Event): Promise<void> {
-    event.preventDefault();
-    const url = (event.target as HTMLFormElement).action;
-
-    if (!this.isValid()) {
-      this.showError('Please fill out all the fields.');
-    } else {
-      this.setDisableForm(true);
-      this.hideError();
-
-      const { status, response } = await this.post(url);
-      this.setDisableForm(false);
-
-      switch (status) {
-        case Status.Ok:
-          const { entryId } = response;
-          const hash = entryId ? `#entry-${entryId}` : '';
-          this.formTarget.reset();
-          Turbolinks.clearCache();
-          Turbolinks.visit(`./guestbook${hash}`);
-          break;
-        case Status.Invalid:
-          this.showError('Please fill out all the fields.');
-          break;
-        case Status.Error:
-          this.showError('Something went wrong. Please try again later.');
-      }
+  private setFeedback(state: StateFrom<typeof machine>) {
+    if (this.hasErrorTarget) {
+      this.errorTarget.textContent = state.context.feedback;
+      this.errorTarget.hidden = state.context.feedback === '';
     }
   }
 
-  get author(): string {
-    return this.authorTarget.value.trim();
+  public changeAuthor(event: InputEvent): void {
+    const { value } = event.target as HTMLInputElement;
+
+    this.fsmService.send({
+      type: 'CHANGE_AUTHOR',
+      value,
+    });
   }
 
-  get message(): string {
-    return this.messageTarget.value.trim();
+  public changeMessage(event: InputEvent): void {
+    const { value } = event.target as HTMLTextAreaElement;
+
+    this.fsmService.send({
+      type: 'CHANGE_MESSAGE',
+      value,
+    });
+  }
+
+  public async submit(event: Event): Promise<void> {
+    event.preventDefault();
+    this.fsmService.send('VALIDATE');
   }
 }

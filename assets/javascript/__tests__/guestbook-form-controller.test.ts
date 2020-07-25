@@ -45,6 +45,6 @@ describe('guestbook-form-controller', () => {
     // doesn't make the form submit... :sadpanda:
     fireEvent.submit(button.form);
 
-    expect(queryByText('Please fill out all the fields.')).toBeTruthy();
+    expect(queryByText('Please fill all the fields.')).toBeTruthy();
   });
 });
