@@ -38,7 +38,7 @@
     "@architect/functions": "3.12.2",
     "@babel/core": "7.10.5",
     "@babel/preset-env": "7.10.4",
-    "@testing-library/dom": "7.21.5",
+    "@testing-library/dom": "7.21.6",
     "@types/classnames": "2.2.10",
     "@types/date-fns": "2.6.0",
     "@types/jest": "26.0.7",
