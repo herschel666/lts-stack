@@ -35,7 +35,7 @@
     "turbolinks": "5.2.0"
   },
   "devDependencies": {
-    "@architect/functions": "3.12.2",
+    "@architect/functions": "3.12.3",
     "@babel/core": "7.11.0",
     "@babel/preset-env": "7.11.0",
     "@testing-library/dom": "7.21.7",
