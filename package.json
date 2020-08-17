@@ -40,7 +40,6 @@
     "@babel/preset-env": "7.11.0",
     "@testing-library/dom": "7.22.2",
     "@types/classnames": "2.2.10",
-    "@types/date-fns": "2.6.0",
     "@types/jest": "26.0.10",
     "@types/turbolinks": "5.2.0",
     "@types/webpack-env": "1.15.2",
