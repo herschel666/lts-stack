@@ -4,8 +4,10 @@
   "description": "A modern stack consisting of Lambda, Turbolinks & StimulusJS.",
   "private": true,
   "scripts": {
-    "start": "concurrently -n \"sandbox,webpack\" \"arc sandbox\" \"webpack --watch\"",
-    "poststart": "./scripts/poststart",
+    "postinstall": "arc hydrate",
+    "watch-sandbox": "arc sandbox",
+    "watch-webpack": "webpack --watch",
+    "start": "concurrently --raw --kill-others --kill-others-on-fail npm:watch-*",
     "prebuild": "rm -rf ./dist",
     "build": "NODE_ENV=production webpack -p --display-error-details --bail --progress",
     "serve": "arc sandbox",
