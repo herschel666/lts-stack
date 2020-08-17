@@ -38,6 +38,7 @@ const baseConfig = { mode: nodeEnv, cache: true, stats: 'minimal' };
 const assetsConfig = {
   ...baseConfig,
   name: 'assets',
+  context: ASSETS,
   entry: [
     path.join(ASSETS, 'javascript', 'main.ts'),
     path.join(ASSETS, 'css', 'main.css'),
