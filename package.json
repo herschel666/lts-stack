@@ -30,7 +30,7 @@
     "@architect/sandbox": "1.13.1",
     "xstate": "4.12.0",
     "classnames": "2.2.6",
-    "date-fns": "2.16.0",
+    "date-fns": "2.16.1",
     "nanoid": "3.1.12",
     "stimulus": "1.1.1",
     "tailwindcss": "1.7.6",
