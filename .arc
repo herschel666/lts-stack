@@ -3,6 +3,7 @@ lts-stack
 
 @aws
 region eu-central-1
+apigateway http
 
 @static
 folder dist
