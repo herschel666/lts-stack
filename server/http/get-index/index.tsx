@@ -16,7 +16,7 @@ interface Request {
 }
 
 interface Response {
-  statusCode?: 404;
+  statusCode: number;
   headers: { [header: string]: string };
   body: ReturnType<typeof page>;
 }
@@ -69,6 +69,7 @@ export const handler = async (req: Request): Promise<Response> => {
 
   return {
     headers,
+    statusCode: 200,
     body: page('Welcome', <Body />),
   };
 };
