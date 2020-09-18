@@ -17,6 +17,7 @@ import { Comment } from '../../components/comment';
 
 interface Response {
   headers: { [header: string]: string };
+  statusCode: number;
   body: ReturnType<typeof page>;
 }
 
@@ -97,6 +98,7 @@ export const handler = async (): Promise<Response> => {
       'cache-control': 'no-cache, no-store, must-revalidate, max-age=0',
       'content-type': 'text/html; charset=utf8',
     },
+    statusCode: 200,
     body: page('Guestbook', <Body entries={entries} />),
   };
 };
