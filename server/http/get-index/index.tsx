@@ -9,12 +9,6 @@ import { Heading } from '../../components/heading';
 
 import ltsStackLogo from '../../../assets/images/lts-stack-logo.png';
 
-interface Request {
-  pathParameters: null | {
-    proxy: string;
-  };
-}
-
 interface Response {
   statusCode: number;
   headers: { [header: string]: string };
@@ -44,28 +38,11 @@ const Body = () => (
   </Page>
 );
 
-const NotFound = () => (
-  <Page>
-    <PageHeader />
-    <div>
-      <Heading text="Not found." />
-    </div>
-  </Page>
-);
-
-export const handler = async (req: Request): Promise<Response> => {
+export const handler = async (): Promise<Response> => {
   const headers = {
     'cache-control': 'no-cache, no-store, must-revalidate, max-age=0',
     'content-type': 'text/html; charset=utf8',
   };
-
-  if (req.pathParameters && req.pathParameters.proxy) {
-    return {
-      statusCode: 404,
-      body: page('Not found', <NotFound />),
-      headers,
-    };
-  }
 
   return {
     headers,
