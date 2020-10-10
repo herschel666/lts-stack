@@ -13,6 +13,7 @@ get /
 get /about
 get /guestbook
 get /guestbook/:entryId
+get /*
 
 post /guestbook
 
