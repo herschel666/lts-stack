@@ -7,6 +7,8 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const globby = require('globby');
 
+/** @typedef {import('webpack').Configuration} Configuration */
+
 const SERVER = path.join(__dirname, 'server');
 const ASSETS = path.join(__dirname, 'assets');
 
@@ -34,7 +36,9 @@ const urlLoader = {
     limit: 8192,
   },
 };
-const baseConfig = { mode: nodeEnv, cache: true, stats: 'minimal' };
+/** @type Configuration */
+const baseConfig = { mode: nodeEnv, cache: true, stats: 'errors-only' };
+/** @type Configuration */
 const assetsConfig = {
   ...baseConfig,
   name: 'assets',
@@ -129,8 +133,8 @@ const getServerFileConfig = (filepath) => {
   const fileDir = path.dirname(filepath);
   const name = path.basename(fileDir);
   const destinationPath = fileDir.replace('/server/', '/src/');
-
-  return {
+  /** @type Configuration */
+  const serverFileConfig = {
     ...baseConfig,
     name,
     context: __dirname,
@@ -160,7 +164,7 @@ const getServerFileConfig = (filepath) => {
       ],
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.json'],
+      extensions: ['.ts', '.tsx', '.js'],
     },
     externals: {
       '@architect/functions': 'commonjs2 @architect/functions',
@@ -187,6 +191,8 @@ const getServerFileConfig = (filepath) => {
       }),
     ],
   };
+
+  return serverFileConfig;
 };
 
 module.exports = async () => {
