@@ -26,7 +26,7 @@
   "author": "Emanuel Kluge (https://emanuel-kluge.de/)",
   "license": "MIT",
   "dependencies": {
-    "@architect/architect": "8.1.0",
+    "@architect/architect": "8.2.1",
     "@architect/sandbox": "3.1.3",
     "xstate": "4.13.0",
     "classnames": "2.2.6",
