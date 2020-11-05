@@ -2,6 +2,6 @@
   "name": "@lts-stack/get-guestbook",
   "private": true,
   "dependencies": {
-    "@architect/functions": "3.13.5"
+    "@architect/functions": "3.13.6"
   }
 }
