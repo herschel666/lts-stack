@@ -40,7 +40,7 @@
     "@architect/functions": "3.13.8",
     "@babel/core": "7.12.7",
     "@babel/preset-env": "7.12.7",
-    "@testing-library/dom": "7.28.0",
+    "@testing-library/dom": "7.28.1",
     "@types/classnames": "2.2.11",
     "@types/jest": "26.0.15",
     "@types/turbolinks": "5.2.0",
