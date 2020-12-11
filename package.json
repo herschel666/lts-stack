@@ -33,7 +33,7 @@
     "date-fns": "2.16.1",
     "nanoid": "3.1.20",
     "stimulus": "1.1.1",
-    "tailwindcss": "2.0.1",
+    "tailwindcss": "2.0.2",
     "turbolinks": "5.2.0"
   },
   "devDependencies": {
