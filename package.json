@@ -48,7 +48,7 @@
     "@typescript-eslint/eslint-plugin": "4.10.0",
     "@typescript-eslint/parser": "4.10.0",
     "autoprefixer": "10.1.0",
-    "aws-sdk": "2.809.0",
+    "aws-sdk": "2.810.0",
     "babel-loader": "8.2.2",
     "concurrently": "5.3.0",
     "copy-webpack-plugin": "7.0.0",
