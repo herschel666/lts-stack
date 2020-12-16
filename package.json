@@ -39,7 +39,7 @@
   "devDependencies": {
     "@architect/functions": "3.13.8",
     "@babel/core": "7.12.10",
-    "@babel/preset-env": "7.12.10",
+    "@babel/preset-env": "7.12.11",
     "@testing-library/dom": "7.29.0",
     "@types/classnames": "2.2.11",
     "@types/jest": "26.0.19",
