@@ -1,4 +1,3 @@
-import h from 'vhtml';
 import {
   getQueriesForElement,
   fireEvent,
@@ -7,9 +6,36 @@ import {
 import { Application } from 'stimulus';
 
 import GuestbookFormController from '../controllers/guestbook-form-controller';
-import { Body } from '../../../server/http/get-guestbook/';
 
 const raf = () => new Promise((resolve) => requestAnimationFrame(resolve));
+
+const html = String.raw;
+
+const body = html` <form
+  action="/guestbook"
+  method="post"
+  data-controller="guestbook-form"
+  data-action="guestbook-form#submit"
+  data-target="guestbook-form.form"
+>
+  <div data-target="guestbook-form.error" hidden></div>
+  <input
+    type="text"
+    placeholder="Enter your name…"
+    data-target="guestbook-form.author"
+    data-action="input->guestbook-form#changeAuthor"
+    required="true"
+  />
+  <textarea
+    placeholder="Enter your message…"
+    data-target="guestbook-form.message"
+    data-action="input->guestbook-form#changeMessage"
+    required="true"
+  ></textarea>
+  <div class="w-2/3">
+    <button data-target="guestbook-form.submit">Submit</button>
+  </div>
+</form>`;
 
 interface DOMResult {
   queries: ReturnType<typeof getQueriesForElement>;
@@ -20,7 +46,7 @@ interface DOMResult {
 const getDOM = async (): Promise<DOMResult> => {
   const container = document.createElement('div');
   const boundQueries = getQueriesForElement(container);
-  container.innerHTML = h(Body, { entries: [] });
+  container.innerHTML = body;
   const application = await Application.start(container);
 
   application.register('guestbook-form', GuestbookFormController);

@@ -1,7 +1,6 @@
 {
-  "name": "@lts-stack/get-guestbook",
-  "private": true,
   "dependencies": {
+    "classnames": "2.2.6",
     "@architect/functions": "3.13.8"
   }
 }

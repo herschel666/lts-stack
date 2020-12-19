@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
-    "rootDir": "./server",
-    "baseUrl": "./src",
+    "rootDir": "./assets/javascript",
+    "baseUrl": "./assets/javascript",
     "target": "es2019",
     "lib": ["es2019", "dom"],
-    "jsx": "react",
-    "jsxFactory": "h",
-    "module": "commonjs",
+    "module": "es2020",
     "moduleResolution": "node",
-    "sourceMap": false,
+    "sourceMap": true,
     "inlineSourceMap": false,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["node", "jest", "webpack", "webpack-env"]
+    "types": ["jest"]
   },
-  "exclude": ["node_modules", "@lts-stack/page", "dist"]
+  "include": ["./assets/javascript"],
+  "exclude": ["node_modules"]
 }

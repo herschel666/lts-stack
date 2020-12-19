@@ -1,7 +1,0 @@
-{
-  "name": "@lts-stack/get-about",
-  "private": true,
-  "dependencies": {
-    "@architect/functions": "3.13.8"
-  }
-}

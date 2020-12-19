@@ -1,6 +1,4 @@
 {
-  "name": "@lts-stack/post-guestbook",
-  "private": true,
   "dependencies": {
     "@architect/functions": "3.13.8"
   }

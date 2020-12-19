@@ -1,32 +1,11 @@
 {
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "env": {
-    "browser": true,
     "jest": true,
     "node": true
   },
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended",
-    "plugin:react/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
     "ecmaVersion": 2019,
     "sourceType": "module"
-  },
-  "rules": {
-    "react/prop-types": "off",
-    "react/jsx-key": "off",
-    "react/no-unknown-property": [2, { "ignore": ["class", "for", "datetime"] }]
-  },
-  "settings": {
-    "react": {
-      "pragma": "h",
-      "version": "latest" // the only way to emove the respective warning :shrug:
-    }
   }
 }
