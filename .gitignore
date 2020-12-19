@@ -2,11 +2,3 @@
 node_modules
 sam.*
 dist
-src/views/page.js
-src/**/index.js
-src/http/*/*
-
-# Allow
-!src/http/*/package.json
-!src/http/*/package-lock.json
-!src/http/*/.arc-config

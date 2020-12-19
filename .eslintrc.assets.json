@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "./.eslintrc.json",
+    "prettier/@typescript-eslint",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "jest": true
+  }
+}

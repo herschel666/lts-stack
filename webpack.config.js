@@ -1,13 +1,9 @@
-/* eslint @typescript-eslint/no-var-requires: "off" */
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const globby = require('globby');
 
-const SERVER = path.join(__dirname, 'server');
 const ASSETS = path.join(__dirname, 'assets');
 
 const dev = process.env.NODE_ENV !== 'production';
@@ -27,17 +23,11 @@ const assetsOptimization = dev
         },
       },
     };
-const urlLoader = {
-  test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
-  loader: 'url-loader',
-  options: {
-    limit: 8192,
-  },
-};
-const baseConfig = { mode: nodeEnv, cache: true, stats: 'minimal' };
-const assetsConfig = {
-  ...baseConfig,
-  name: 'assets',
+
+module.exports = {
+  mode: nodeEnv,
+  cache: true,
+  stats: 'minimal',
   context: ASSETS,
   entry: [
     path.join(ASSETS, 'javascript', 'main.ts'),
@@ -45,7 +35,7 @@ const assetsConfig = {
   ],
   output: {
     path: __dirname,
-    filename: path.join('dist', `[name].${dev ? '' : '[contenthash].'}js`),
+    filename: path.join('dist', '[name].js'),
     publicPath: '/',
   },
   module: {
@@ -106,90 +96,27 @@ const assetsConfig = {
           },
         ],
       },
-      urlLoader,
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+        },
+      },
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(ASSETS, 'html', 'template.ejs'),
-      templateParameters: {
-        siteTitle: 'LTSstack',
-      },
-      filename: path.join('src', 'views', 'page.js'),
-      inject: false,
-    }),
     new MiniCssExtractPlugin({
-      filename: path.join('dist', `[name].${dev ? '' : '[contenthash].'}css`),
+      filename: path.join('dist', '[name].css'),
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.join('images', '*.{jpg,png,gif,svg}'),
+          to: path.join('dist', 'images', '[name].[ext]'),
+        },
+      ],
     }),
   ],
   optimization: assetsOptimization,
-};
-
-const getServerFileConfig = (filepath) => {
-  const fileDir = path.dirname(filepath);
-  const name = path.basename(fileDir);
-  const destinationPath = fileDir.replace('/server/', '/src/');
-
-  return {
-    ...baseConfig,
-    name,
-    context: __dirname,
-    devtool: false,
-    target: 'node',
-    entry: filepath,
-    output: {
-      path: destinationPath,
-      filename: 'index.js',
-      libraryTarget: 'commonjs2',
-    },
-    module: {
-      rules: [
-        {
-          test: /\.tsx?$/,
-          include: SERVER,
-          use: [
-            {
-              loader: 'ts-loader',
-              options: {
-                transpileOnly: true,
-              },
-            },
-          ],
-        },
-        urlLoader,
-      ],
-    },
-    resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.json'],
-    },
-    externals: {
-      '@architect/functions': 'commonjs2 @architect/functions',
-      '@architect/views/page': 'commonjs2 @architect/views/page',
-    },
-    optimization: {
-      sideEffects: false,
-      nodeEnv,
-    },
-    plugins: [
-      new CopyPlugin({
-        patterns: [
-          {
-            from: path.join('src', 'http', '**', '*.{jpg,png,gif,svg}'),
-            to: 'dist/[hash].[ext]',
-            context: __dirname,
-            flatten: true,
-            noErrorOnMissing: true,
-            transformPath(targetPath) {
-              return path.join('..', '..', '..', targetPath);
-            },
-          },
-        ],
-      }),
-    ],
-  };
-};
-
-module.exports = async () => {
-  const serverFiles = await globby(path.join(SERVER, '**/index.{ts,tsx}'));
-  return [assetsConfig].concat(serverFiles.map(getServerFileConfig));
 };

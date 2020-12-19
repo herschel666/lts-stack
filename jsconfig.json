@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "es2019",
+    "lib": ["es2019", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "checkJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["./src"]
+}

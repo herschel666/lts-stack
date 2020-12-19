@@ -1,7 +1,7 @@
 module.exports = {
   purge: {
     enabled: process.env.NODE_ENV === 'production',
-    content: ['./server/**/*.tsx'],
+    content: ['./src/**/*.js'],
   },
   future: {
     purgeLayersByDefault: true,
