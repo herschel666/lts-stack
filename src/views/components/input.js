@@ -1,5 +1,3 @@
-const classNames = require('classnames');
-
 const { html } = require('../lib/html');
 
 /**
@@ -14,16 +12,13 @@ const { html } = require('../lib/html');
  * @template {Pick<BaseProps, 'id' | 'label'>} OuterProps
  */
 
-const label = classNames('w-1/3', 'pr-8', 'text-right');
-const input = classNames('w-2/3', 'p-2', 'border');
-
 /**
  * @template {OuterProps & { children: string }} Props
  * @param {Props}
  * @returns {string}
  */
 const Outer = ({ children, id, label: labelText }) => html`
-  <label for=${id} class=${label}> ${labelText} </label>
+  <label for=${id} class="c-input__label"> ${labelText} </label>
   ${children}
 `;
 
@@ -45,7 +40,7 @@ exports.TextInput = ({
       id=${id}
       name=${id}
       placeholder=${placeholder}
-      class=${input}
+      class="c-input__element"
       data-target=${target}
       data-action=${action}
       required=${required}
@@ -70,7 +65,7 @@ exports.TextArea = ({
       id=${id}
       name=${id}
       placeholder=${placeholder}
-      class=${input}
+      class="c-input__element"
       rows="8"
       data-target=${target}
       data-action=${action}

@@ -1,0 +1,9 @@
+.c-slim-content {
+  @apply w-4/5;
+  @apply mx-auto;
+  @apply my-16;
+}
+
+.c-slim-content--divided {
+  @apply divide-y-2;
+}

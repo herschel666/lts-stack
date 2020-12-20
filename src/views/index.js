@@ -9,6 +9,7 @@ const { TextArea, TextInput } = require('./components/input');
 const { Page } = require('./components/page');
 const { PageHeader } = require('./components/page-header');
 const { PageTitle } = require('./components/page-title');
+const { SlimContent } = require('./components/slim-content');
 
 const components = {
   Button,
@@ -21,6 +22,7 @@ const components = {
   Page,
   PageHeader,
   PageTitle,
+  SlimContent,
 };
 
 module.exports = { html, page, components };

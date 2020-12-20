@@ -1,0 +1,5 @@
+.c-form-row {
+  @apply mb-8;
+  @apply flex;
+  @apply items-center;
+}

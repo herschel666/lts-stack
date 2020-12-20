@@ -1,0 +1,24 @@
+.c-comment {
+  @apply my-8;
+  @apply py-8;
+}
+
+.c-comment__header {
+  @apply mb-4;
+  @apply flex;
+  @apply justify-between;
+}
+
+.c-comment__author-link {
+  @apply text-blue-700;
+  @apply hover:text-black;
+  @apply focus:text-black;
+}
+
+.c-comment__time {
+  @apply text-sm;
+}
+
+.c-comment__message {
+  @apply whitespace-pre-wrap;
+}

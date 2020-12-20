@@ -2,8 +2,6 @@ const classNames = require('classnames');
 
 const { html } = require('../lib/html');
 
-const row = classNames('mb-8', 'flex', 'items-center');
-
 /**
  * @param {object} props
  * @param {string} [props.class]
@@ -11,5 +9,5 @@ const row = classNames('mb-8', 'flex', 'items-center');
  * @returns {string}
  */
 exports.FormRow = ({ class: cssClass, children }) => html`
-  <div class=${classNames(row, cssClass)}>${children}</div>
+  <div class=${classNames('c-form-row', cssClass)}>${children}</div>
 `;
