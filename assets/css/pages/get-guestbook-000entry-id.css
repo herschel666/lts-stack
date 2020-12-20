@@ -1,0 +1,7 @@
+.p-get-guestbook-000entry-id__back {
+  @apply block;
+  @apply mb-4;
+  @apply text-blue-700;
+  @apply hover:text-black;
+  @apply focus:text-black;
+}

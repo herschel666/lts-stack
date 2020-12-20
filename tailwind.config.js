@@ -7,7 +7,14 @@ module.exports = {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
   },
-  theme: {},
+  theme: {
+    screens: {
+      sm: '320px',
+      md: '480',
+      lg: '640px',
+      xl: '768px',
+    },
+  },
   variants: {},
   plugins: [],
 };

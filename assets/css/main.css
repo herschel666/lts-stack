@@ -2,7 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'components/pagte-title.css';
+@import 'components/button.css';
+@import 'components/comment.css';
+@import 'components/fieldset.css';
+@import 'components/form-row.css';
+@import 'components/heading.css';
+@import 'components/input.css';
+@import 'components/page.css';
+@import 'components/page-header.css';
+@import 'components/page-title.css';
+@import 'components/slim-content.css';
+
+@import 'pages/get-index.css';
+@import 'pages/get-guestbook-000entry-id.css';
 
 body {
   overflow-y: scroll;

@@ -1,0 +1,9 @@
+.c-heading {
+  @apply mb-8;
+  @apply text-2xl;
+  @apply md:text-3xl;
+  @apply lg:text-4xl;
+  @apply xl:text-5xl;
+  @apply text-yellow-900;
+  @apply leading-relaxed;
+}

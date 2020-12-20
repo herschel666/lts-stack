@@ -1,0 +1,10 @@
+.c-page-title {
+  @apply font-bold;
+  @apply text-yellow-500;
+  letter-spacing: 0.2rem;
+}
+
+.c-page-title__lts[title] {
+  @apply text-blue-700;
+  text-decoration: none;
+}

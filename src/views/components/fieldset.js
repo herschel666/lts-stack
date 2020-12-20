@@ -1,10 +1,4 @@
-const classNames = require('classnames');
-
 const { html } = require('../lib/html');
-
-const legend = classNames('block', 'pb-8', 'text-2xl', 'font-bold');
-// TODO: improve this
-const legendStyle = 'margin-left: 33.3%';
 
 /**
  * @param {object} props
@@ -15,9 +9,7 @@ const legendStyle = 'margin-left: 33.3%';
 exports.Fieldset = ({ legend: legendText, children }) => html`
   <fieldset>
     ${legendText
-      ? html`<legend class=${legend} style=${legendStyle}>
-          ${legendText}
-        </legend>`
+      ? html`<legend class="c-fieldset__legend">${legendText}</legend>`
       : ''}
     ${children}
   </fieldset>

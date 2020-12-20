@@ -1,0 +1,5 @@
+.c-page {
+  @apply container;
+  @apply mx-auto;
+  @apply px-8;
+}

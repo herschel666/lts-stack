@@ -2,7 +2,6 @@
  * @typedef {import('../../typings/aws').APIGatewayResult} Response
  */
 
-const classNames = require('classnames');
 /** @type {import('../../typings/architect_functions').default} */
 const arc = require('@architect/functions');
 
@@ -10,22 +9,16 @@ const { html, page, components } = require('@architect/views');
 
 const { Page, PageHeader, Heading } = components;
 
-const image = classNames('w-1/3', 'mb-12');
-const addendum = classNames(
-  'mt-16',
-  'text-xl',
-  'text-gray-800',
-  'tracking-wider'
-);
-
 /** @returns {string} */
 const Body = () => html`
   <${Page}>
     <${PageHeader} />
-    <img src=${arc.static('images/lts-stack-logo.png')} alt="" class=${image} />
+    <img src=${arc.static(
+      'images/lts-stack-logo.png'
+    )} alt="" class="p-get-index__image" />
     <div>
       <${Heading} text="A modern stack consisting of Lambda, Turbolinks & StimulusJS." />
-      <p class=${addendum}>
+      <p class="p-get-index__addendum">
         …the "T" is also for Tailwind.
       </p>
     </div>

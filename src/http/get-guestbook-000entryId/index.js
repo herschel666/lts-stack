@@ -53,9 +53,12 @@ exports.handler = async (req) => {
       ? html`<${Heading} text="An error occured." />`
       : entry
       ? html`
-          <a href=${arc.http.helpers.url(`/guestbook#entry-${entryId}`)}
-            >back</a
+          <a
+            class="p-get-guestbook-000entry-id__back"
+            href=${arc.http.helpers.url(`/guestbook#entry-${entryId}`)}
           >
+            back
+          </a>
           <hr />
           <${Comment}
             entryId=${entry.entryId}

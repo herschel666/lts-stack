@@ -1,0 +1,7 @@
+.c-button {
+  @apply py-2;
+  @apply px-4;
+  @apply bg-gray-200;
+  @apply hover:bg-gray-300;
+  @apply focus:bg-gray-300;
+}

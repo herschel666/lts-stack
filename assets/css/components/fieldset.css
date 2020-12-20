@@ -1,0 +1,7 @@
+.c-fieldset__legend {
+  @apply block;
+  @apply pb-8;
+  @apply text-2xl;
+  @apply font-bold;
+  margin-left: 33.3%;
+}

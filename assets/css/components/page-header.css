@@ -1,0 +1,19 @@
+.c-page-header {
+  @apply border-b;
+  @apply mb-16;
+  @apply py-8;
+  @apply flex;
+  @apply justify-between;
+}
+
+.c-page-header__navigation {
+  @apply flex;
+}
+
+.c-page-header__nav-item {
+  @apply block;
+  @apply ml-8;
+  @apply pl-4;
+  @apply hover:text-blue-700;
+  @apply focus:text-blue-700;
+}
