@@ -1,10 +1,12 @@
+// @ts-check
+
 const { html } = require('../lib/html');
 
 /**
  * @param {object} props
  * @param {string} [props.legend]
  * @param {string} props.children
- * @returns string
+ * @returns {ReturnType<html>}
  */
 exports.Fieldset = ({ legend: legendText, children }) => html`
   <fieldset>

@@ -1,4 +1,7 @@
+// @ts-check
+
 /**
+ * @typedef {import('aws-sdk/clients/dynamodb').AttributeMap} AttributeMap
  * @typedef {import('../../typings/aws').APIGatewayEvent} APIGatewayEvent
  * @typedef {import('../../typings/aws').APIGatewayResult} Response
  * @typedef {import('../../typings/components').Entry} Entry
@@ -10,14 +13,14 @@ const arc = require('@architect/functions');
 /** @type {{ ddb: DDB }} */
 const shared = require('@architect/shared');
 
-const { html, page, components } = require('@architect/views');
+const { html, render, page, components } = require('@architect/views');
 
 const { Page, Heading, PageHeader, Comment } = components;
 
 /**
  * @param {object} props
  * @param {string} props.content
- * @returns {string}
+ * @returns {ReturnType<html>}
  */
 const Body = ({ content }) => html`
   <${Page}>
@@ -37,7 +40,7 @@ exports.handler = async (req) => {
   const { entryId } = req.pathParameters;
   /** @type {number} */
   let statusCode;
-  /** @type {Entry} */
+  /** @type {AttributeMap} */
   let entry;
 
   try {
@@ -69,6 +72,7 @@ exports.handler = async (req) => {
           />
         `
       : html`<${Heading} text="Nothing found." />`;
+  const body = render(() => html`<${Body} content=${content} />`);
 
   return {
     statusCode,
@@ -76,6 +80,6 @@ exports.handler = async (req) => {
       'cache-control': 'no-cache, no-store, must-revalidate, max-age=0',
       'content-type': 'text/html; charset=utf8',
     },
-    body: page('Guestbook', html`<${Body} content=${content} />`),
+    body: page('Guestbook', body),
   };
 };

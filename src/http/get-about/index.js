@@ -1,12 +1,14 @@
+// @ts-check
+
 /**
  * @typedef {import('../../typings/aws').APIGatewayResult} Response
  */
 
-const { html, page, components } = require('@architect/views');
+const { html, render, page, components } = require('@architect/views');
 
 const { Page, PageHeader, Heading } = components;
 
-/** @returns {string} */
+/** @returns {ReturnType<html>} */
 const Body = () => html`
 <${Page}>
     <${PageHeader} />
@@ -28,6 +30,6 @@ exports.handler = async () => {
       'content-type': 'text/html; charset=utf8',
     },
     statusCode: 200,
-    body: page('About', html`<${Body} />`),
+    body: page('About', render(Body)),
   };
 };

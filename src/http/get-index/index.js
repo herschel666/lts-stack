@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * @typedef {import('../../typings/aws').APIGatewayResult} Response
  */
@@ -5,11 +7,11 @@
 /** @type {import('../../typings/architect_functions').default} */
 const arc = require('@architect/functions');
 
-const { html, page, components } = require('@architect/views');
+const { html, render, page, components } = require('@architect/views');
 
 const { Page, PageHeader, Heading } = components;
 
-/** @returns {string} */
+/** @returns {ReturnType<html>} */
 const Body = () => html`
   <${Page}>
     <${PageHeader} />
@@ -35,6 +37,6 @@ exports.handler = async () => {
   return {
     headers,
     statusCode: 200,
-    body: page('Welcome', html`<${Body} />`),
+    body: page('Welcome', render(Body)),
   };
 };

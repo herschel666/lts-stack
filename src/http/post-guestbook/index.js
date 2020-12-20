@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * @typedef {import('../../typings/aws').APIGatewayEvent} APIGatewayEvent
  * @typedef {import('../../typings/aws').APIGatewayResult} Response
