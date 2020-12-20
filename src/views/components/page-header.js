@@ -1,7 +1,9 @@
+// @ts-check
+
 const { PageTitle } = require('./page-title');
 const { html } = require('../lib/html');
 
-/** @returns {string} */
+/** @returns {ReturnType<html>} */
 exports.PageHeader = () => html`
   <header class="c-page-header">
     <${PageTitle} />

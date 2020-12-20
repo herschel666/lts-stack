@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * @typedef {import('../../typings/aws').APIGatewayResult} Response
  * @typedef {import('../../typings/components').Entry} Entry
@@ -9,7 +11,7 @@ const arc = require('@architect/functions');
 /** @type {{ ddb: DDB }} */
 const shared = require('@architect/shared');
 
-const { html, page, components } = require('@architect/views');
+const { html, render, page, components } = require('@architect/views');
 
 const {
   Button,
@@ -27,7 +29,7 @@ const {
 /**
  * @param {object} props
  * @param {Entry[]} props.entries
- * @returns {string}
+ * @returns {ReturnType<html>}
  */
 const Body = ({ entries }) => html`
   <${Page}>
@@ -95,14 +97,15 @@ const Body = ({ entries }) => html`
 
 /** @returns {Promise<Response>} */
 exports.handler = async () => {
-  /** @type {Entry[]} */
   const entries = await shared.ddb.getGuestbookEntries();
+  const body = render(() => html`<${Body} entries=${entries} />`);
+
   return {
     headers: {
       'cache-control': 'no-cache, no-store, must-revalidate, max-age=0',
       'content-type': 'text/html; charset=utf8',
     },
     statusCode: 200,
-    body: page('Guestbook', html`<${Body} entries=${entries} />`),
+    body: page('Guestbook', body),
   };
 };

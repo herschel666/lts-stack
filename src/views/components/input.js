@@ -1,21 +1,23 @@
+// @ts-check
+
 const { html } = require('../lib/html');
 
 /**
- * @template {{
- *  label: string;
- *  placeholder: string;
- *  id: string;
- *  ['data-target']?: string;
- *  ['data-action']?: string;
- *  required?: boolean;
- * }} BaseProps
- * @template {Pick<BaseProps, 'id' | 'label'>} OuterProps
+ * @typedef BaseProps
+ * @property {string} label
+ * @property {string} placeholder
+ * @property {string} id
+ * @property {string} [data-target]
+ * @property {string} [data-action]
+ * @property {boolean} [required]
+ *
+ * @typedef {Pick<BaseProps, 'id' | 'label'>} OuterProps
  */
 
 /**
- * @template {OuterProps & { children: string }} Props
- * @param {Props}
- * @returns {string}
+ * @typedef {OuterProps & { children: string }} Props
+ * @param {Props} props
+ * @returns {ReturnType<html>}
  */
 const Outer = ({ children, id, label: labelText }) => html`
   <label for=${id} class="c-input__label"> ${labelText} </label>
@@ -23,8 +25,8 @@ const Outer = ({ children, id, label: labelText }) => html`
 `;
 
 /**
- * @param {BaseProps}
- * @returns {string}
+ * @param {BaseProps} props
+ * @returns {ReturnType<html>}
  */
 exports.TextInput = ({
   id,
@@ -49,8 +51,8 @@ exports.TextInput = ({
 `;
 
 /**
- * @param {BaseProps}
- * @returns {string}
+ * @param {BaseProps} props
+ * @returns {ReturnType<html>}
  */
 exports.TextArea = ({
   id,

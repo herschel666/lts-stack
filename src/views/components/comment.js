@@ -1,8 +1,12 @@
+// @ts-check
+
 /**
  * @typedef {import('../../typings/components').Entry} Entry
  * @typedef {Entry & { detail?: boolean }} Props
  */
 
+/** @type {import('date-fns/format')['default']} */
+// @ts-ignore
 const format = require('date-fns/format');
 /** @type {import('../../typings/architect_functions').default} */
 const arc = require('@architect/functions');
@@ -11,7 +15,7 @@ const { html } = require('../lib/html');
 
 /**
  * @param {Pick<Props, 'author' | 'entryId' | 'detail'>} props
- * @returns {string}
+ * @returns {ReturnType<html>}
  */
 const Author = ({ author, entryId, detail }) => {
   const inner = detail
@@ -27,7 +31,7 @@ const Author = ({ author, entryId, detail }) => {
 
 /**
  * @param {Props} props
- * @returns {string}
+ * @returns {ReturnType<html>}
  */
 exports.Comment = ({
   entryId,

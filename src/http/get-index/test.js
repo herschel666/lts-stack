@@ -1,3 +1,5 @@
+// @ts-check
+
 const { handler } = require('.');
 
 describe('handler()', () => {

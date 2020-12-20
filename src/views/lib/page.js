@@ -1,3 +1,5 @@
+// @ts-check
+
 /** @type {import('../../typings/architect_functions').default} */
 const arc = require('@architect/functions');
 const { html } = require('./html');

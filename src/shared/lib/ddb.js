@@ -1,3 +1,5 @@
+// @ts-check
+
 /**
  * @typedef {import('../../typings/architect_functions').Data} ArcData
  * @typedef {import('../../typings/architect_shared').DDB} DDB
