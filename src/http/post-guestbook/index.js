@@ -12,14 +12,19 @@
 
 /** @type {{ ddb: DDB }} */
 const shared = require('@architect/shared');
+/** @type {import('../../typings/architect_functions').default} */
+const arc = require('@architect/functions');
+
+/** @type {(keyof Payload)[]} */
+const payloadKeys = ['author', 'message', 'createdAt'];
 
 /**
- * @param {string} body
+ * @param {AGWRequest} req
  * @returns {Payload}
  */
-const getPayload = (body) => {
+const getPayload = (req) => {
   try {
-    return JSON.parse(Buffer.from(body, 'base64').toString('utf8'));
+    return arc.http.helpers.bodyParser(req);
   } catch (err) {
     console.log(err);
     return {};
@@ -27,13 +32,40 @@ const getPayload = (body) => {
 };
 
 /**
- *
- * @param  {...string[]} fields
+ * @param {string} date
  * @returns {boolean}
  */
-const validate = (...fields) =>
-  fields.reduce(
-    (prev, value) => prev && typeof value === 'string' && value.length > 0,
+const isValidDate = (date) => {
+  try {
+    return typeof new Date(date).toISOString() === 'string';
+  } catch {
+    return false;
+  }
+};
+
+/**
+ *
+ * @param  {Payload & Record<string, unknown>} payload
+ * @returns {boolean}
+ */
+const validate = (payload) =>
+  Object.entries(payload).reduce(
+    /**
+     * @param {boolean} prev
+     * @param {[string, string]} value
+     */
+    (prev, [key, value]) => {
+      let isValid =
+        prev &&
+        payloadKeys.includes(key) &&
+        typeof value === 'string' &&
+        value.length > 0;
+
+      if (isValid && key === 'createdAt') {
+        isValid = isValidDate(value);
+      }
+      return isValid;
+    },
     true
   );
 
@@ -45,19 +77,15 @@ const validate = (...fields) =>
  * @returns {Promise<Response>}
  */
 exports.handler = async (req) => {
-  const { author, message, createdAt } = getPayload(req.body);
-  const isValid = validate(author, message, createdAt);
+  const payload = getPayload(req);
+  const isValid = validate(payload);
   let statusCode = isValid ? 200 : 400;
   /** @type {string} */
   let entryId;
 
   if (isValid) {
     try {
-      entryId = await shared.ddb.putGuestbookEntry({
-        author,
-        message,
-        createdAt,
-      });
+      entryId = await shared.ddb.putGuestbookEntry(payload);
     } catch (err) {
       console.log(err);
       statusCode = 500;
