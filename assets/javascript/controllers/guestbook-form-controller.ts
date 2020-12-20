@@ -114,6 +114,9 @@ const machine = createMachine<Context, Events, StateSchema>(
         const createdAt = new Date().toISOString();
         const response = await fetch(url, {
           method: 'post',
+          headers: {
+            'content-type': 'application/json',
+          },
           body: JSON.stringify({ author, message, createdAt }),
         });
 
