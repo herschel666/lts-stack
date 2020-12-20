@@ -165,21 +165,25 @@ export default class extends Controller {
   }
 
   public changeAuthor(event: InputEvent): void {
-    const { value } = event.target as HTMLInputElement;
+    if (event.target instanceof HTMLInputElement) {
+      const { value } = event.target;
 
-    this.fsmService.send({
-      type: 'CHANGE_AUTHOR',
-      value,
-    });
+      this.fsmService.send({
+        type: 'CHANGE_AUTHOR',
+        value,
+      });
+    }
   }
 
   public changeMessage(event: InputEvent): void {
-    const { value } = event.target as HTMLTextAreaElement;
+    if (event.target instanceof HTMLTextAreaElement) {
+      const { value } = event.target;
 
-    this.fsmService.send({
-      type: 'CHANGE_MESSAGE',
-      value,
-    });
+      this.fsmService.send({
+        type: 'CHANGE_MESSAGE',
+        value,
+      });
+    }
   }
 
   public async submit(event: Event): Promise<void> {
