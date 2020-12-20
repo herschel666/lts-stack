@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@architect/functions": "3.13.8",
-    "classnames": "2.2.6",
-    "date-fns": "2.16.1",
-    "htm": "3.0.4",
-    "vhtml": "2.2.0"
-  }
-}
