@@ -8,8 +8,6 @@
 /** @type {import('date-fns/format')['default']} */
 // @ts-ignore
 const format = require('date-fns/format');
-/** @type {import('../../typings/architect_functions').default} */
-const arc = require('@architect/functions');
 
 const { html } = require('../lib/html');
 
@@ -20,10 +18,7 @@ const { html } = require('../lib/html');
 const Author = ({ author, entryId, detail }) => {
   const inner = detail
     ? author
-    : html`<a
-        class="c-comment__author-link"
-        href=${arc.http.helpers.url(`/guestbook/${entryId}`)}
-      >
+    : html`<a class="c-comment__author-link" href=${`/guestbook/${entryId}`}>
         ${author}
       </a>`;
   return html`<strong>${inner}</strong>`;

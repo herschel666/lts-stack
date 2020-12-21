@@ -6,8 +6,6 @@
  * @typedef {import('../../typings/architect_shared').DDB} DDB
  */
 
-/** @type {import('../../typings/architect_functions').default} */
-const arc = require('@architect/functions');
 /** @type {{ ddb: DDB }} */
 const shared = require('@architect/shared');
 
@@ -42,7 +40,7 @@ const Body = ({ entries }) => html`
       </p>
       <${SlimContent}>
         <form
-          action=${arc.http.helpers.url('/guestbook')}
+          action="/guestbook"
           method="post"
           data-controller="guestbook-form"
           data-action="guestbook-form#submit"

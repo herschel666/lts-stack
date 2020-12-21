@@ -8,8 +8,6 @@
  * @typedef {import('../../typings/architect_shared').DDB} DDB
  */
 
-/** @type {import('../../typings/architect_functions').default} */
-const arc = require('@architect/functions');
 /** @type {{ ddb: DDB }} */
 const shared = require('@architect/shared');
 
@@ -58,7 +56,7 @@ exports.handler = async (req) => {
       ? html`
           <a
             class="p-get-guestbook-000entry-id__back"
-            href=${arc.http.helpers.url(`/guestbook#entry-${entryId}`)}
+            href=${`/guestbook#entry-${entryId}`}
           >
             back
           </a>
