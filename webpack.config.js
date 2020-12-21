@@ -28,7 +28,6 @@ module.exports = {
   mode: nodeEnv,
   cache: true,
   stats: 'minimal',
-  context: ASSETS,
   entry: [
     path.join(ASSETS, 'javascript', 'main.ts'),
     path.join(ASSETS, 'css', 'main.css'),
@@ -112,7 +111,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.join('images', '*.{jpg,png,gif,svg}'),
+          from: path.join(ASSETS, 'images', '*.{jpg,png,gif,svg}'),
           to: path.join('dist', 'images', '[name].[ext]'),
         },
       ],
