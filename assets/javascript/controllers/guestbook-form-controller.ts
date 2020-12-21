@@ -101,7 +101,7 @@ const machine = createMachine<Context, Events, StateSchema>(
       isValid: (ctx: Context): boolean =>
         Boolean(ctx.author.length && ctx.message.length),
       isInvalid: (ctx: Context): boolean =>
-        !ctx.author.length && !ctx.message.length,
+        !ctx.author.length || !ctx.message.length,
       invalidRequest: (_, event: DoneInvokeEvent<Error>) =>
         event.data.message === '400',
       failedRequest: (_, event: DoneInvokeEvent<Error>) =>
