@@ -19,7 +19,10 @@ exports.getGuestbookEntries = async () => {
   const query = {
     IndexName: 'GSI1PK-GSI1SK-index',
     KeyConditionExpression: 'GSI1PK = :GuestbookEntry',
-    FilterExpression: '_ttl >= :CurrentTime',
+    FilterExpression: '#ttl >= :CurrentTime',
+    ExpressionAttributeNames: {
+      '#ttl': '_ttl',
+    },
     ExpressionAttributeValues: {
       ':GuestbookEntry': 'GUESTBOOK_ENTRY',
       ':CurrentTime': currentTime,
