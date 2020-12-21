@@ -12,6 +12,5 @@
     "allowSyntheticDefaultImports": true,
     "types": ["jest"]
   },
-  "include": ["./assets/javascript"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
