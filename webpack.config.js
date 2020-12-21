@@ -15,7 +15,7 @@ const assetsOptimization = dev
       splitChunks: {
         cacheGroups: {
           styles: {
-            name: 'styles',
+            name: 'main',
             test: /\.css$/,
             chunks: 'all',
             enforce: true,
