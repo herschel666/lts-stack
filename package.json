@@ -19,7 +19,9 @@
     "fmt": "prettier --config ./.prettierrc --ignore-path ./.prettierignore \"**/**.{js,md,css,ts,js}\"",
     "fmt:write": "npm run fmt -- --write",
     "fmt:check": "npm run fmt -- --check",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "predeploy": "npm run build",
+    "deploy": "arc deploy"
   },
   "author": "Emanuel Kluge (https://emanuel-kluge.de/)",
   "license": "MIT",
