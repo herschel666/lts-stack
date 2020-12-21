@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": "./assets/javascript",
-    "baseUrl": "./assets/javascript",
+    "rootDir": "./",
     "target": "es2019",
     "lib": ["es2019", "dom"],
     "module": "es2020",
