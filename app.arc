@@ -3,10 +3,12 @@ lts-stack
 
 @aws
 region eu-central-1
-apigateway http
+profile lts-stack
+bucket ek-geloets-installationen-ftw
 
 @static
 folder dist
+fingerprint true
 
 @http
 get /
@@ -27,3 +29,6 @@ lts-stack
 lts-stack
   GSI1PK *String
   GSI1SK **String
+
+@macros
+herschel666-arc-macros-custom-log-groups
