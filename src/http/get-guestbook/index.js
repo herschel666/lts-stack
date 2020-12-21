@@ -44,9 +44,9 @@ const Body = ({ entries }) => html`
           method="post"
           data-controller="guestbook-form"
           data-action="guestbook-form#submit"
-          data-target="guestbook-form.form"
+          data-guestbook-form-target="form"
         >
-          <div data-target="guestbook-form.error" hidden></div>
+          <div data-guestbook-form-target="error" hidden></div>
           <${Fieldset} legend="Write a message">
             <${FormRow}>
               <${TextInput}
