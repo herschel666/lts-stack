@@ -15,6 +15,7 @@ get /
 get /about
 get /guestbook
 get /guestbook/:entryId
+get /site.webmanifest
 get /*
 
 post /guestbook
