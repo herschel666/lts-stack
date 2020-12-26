@@ -12,5 +12,5 @@
 }
 
 .c-page-title__lts[title] {
-  text-decoration: none;
+  @apply no-underline;
 }
