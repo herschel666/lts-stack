@@ -13,7 +13,7 @@ const shared = require('@architect/shared');
 
 const { html, render, page, components } = require('@architect/views');
 
-const { Page, Heading, PageHeader, Comment } = components;
+const { Page, Heading, Comment } = components;
 
 /**
  * @param {object} props
@@ -22,8 +22,7 @@ const { Page, Heading, PageHeader, Comment } = components;
  */
 const Body = ({ content }) => html`
   <${Page}>
-    <${PageHeader} />
-    <main>${content}</main>
+    ${content}
   </${Page}>
 `;
 

@@ -1,19 +1,28 @@
 .c-page-header {
   @apply border-b;
   @apply mb-16;
-  @apply py-8;
-  @apply flex;
-  @apply justify-between;
+  @apply pt-4;
+  @apply lg:pt-8;
+  @apply pb-8;
+  @apply lg:flex;
+  @apply lg:justify-between;
 }
 
 .c-page-header__navigation {
+  @apply mt-8;
+  @apply lg:mt-0;
   @apply flex;
+  @apply justify-center;
 }
 
 .c-page-header__nav-item {
   @apply block;
-  @apply ml-8;
-  @apply pl-4;
+  @apply mx-4;
+  @apply md:mx-8;
+  @apply lg:mr-0;
+  @apply px-2;
+  @apply md:px-4;
+  @apply lg:pr-0;
   @apply hover:text-blue-700;
   @apply focus:text-blue-700;
 }

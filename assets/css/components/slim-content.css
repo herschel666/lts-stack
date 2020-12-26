@@ -1,5 +1,5 @@
 .c-slim-content {
-  @apply w-4/5;
+  @apply lg:w-4/5;
   @apply mx-auto;
   @apply my-16;
 }

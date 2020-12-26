@@ -9,22 +9,19 @@ const arc = require('@architect/functions');
 
 const { html, render, page, components } = require('@architect/views');
 
-const { Page, PageHeader, Heading } = components;
+const { Page, Heading } = components;
 
 /** @returns {ReturnType<html>} */
 const Body = () => html`
   <${Page}>
-    <${PageHeader} />
     <img src=${arc.static(
       'images/lts-stack-logo.png'
     )} alt="" class="p-get-index__image" />
-    <div>
-      <${Heading} text="A modern stack consisting of Lambda, Turbolinks & StimulusJS." />
-      <p class="p-get-index__addendum">
-        …the "T" is also for Tailwind.
-      </p>
-    </div>
-  </${Page}>
+    <${Heading} text="A modern stack consisting of Lambda, Turbolinks & StimulusJS." />
+    <p class="p-get-index__addendum">
+      …the "T" is also for Tailwind.
+    </p>
+</${Page}>
 `;
 
 /** @returns {Promise<Response>} */

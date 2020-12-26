@@ -5,8 +5,8 @@
 
 .c-comment__header {
   @apply mb-4;
-  @apply flex;
-  @apply justify-between;
+  @apply md:flex;
+  @apply md:justify-between;
 }
 
 .c-comment__author-link {
@@ -16,7 +16,10 @@
 }
 
 .c-comment__time {
-  @apply text-sm;
+  @apply block;
+  @apply mt-1;
+  @apply md:mt-0;
+  @apply text-xs;
 }
 
 .c-comment__message {

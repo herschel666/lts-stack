@@ -1,5 +1,14 @@
 .c-page {
-  @apply container;
+  @apply flex;
+  @apply flex-col;
+  @apply w-full;
+  @apply min-h-full;
   @apply mx-auto;
-  @apply px-8;
+  @apply px-4;
+  @apply md:px-8;
+  max-width: 768px;
+}
+
+.c-page__main {
+  @apply flex-1;
 }

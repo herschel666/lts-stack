@@ -1,0 +1,17 @@
+.c-page-footer {
+  @apply py-4;
+  @apply text-gray-600;
+  @apply text-sm;
+}
+
+.c-page-footer__copy {
+  @apply pr-8;
+}
+
+.c-page-footer__link {
+  @apply underline;
+  @apply hover:no-underline;
+  @apply focus:no-underline;
+  @apply hover:text-blue-700;
+  @apply focus:text-blue-700;
+}

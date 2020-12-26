@@ -6,15 +6,12 @@
 
 const { html, render, page, components } = require('@architect/views');
 
-const { Page, PageHeader, Heading } = components;
+const { Page, Heading } = components;
 
 /** @returns {ReturnType<html>} */
 const NotFound = () => html`
   <${Page}>
-    <${PageHeader} />
-    <div>
-      <${Heading} text="Not found." />
-    </div>
+    <${Heading} text="Not found." />
   </${Page}>
 `;
 
