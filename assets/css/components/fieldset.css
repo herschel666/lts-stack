@@ -3,5 +3,10 @@
   @apply pb-8;
   @apply text-2xl;
   @apply font-bold;
-  margin-left: 33.3%;
+}
+
+@media (min-width: 480px) {
+  .c-fieldset__legend {
+    margin-left: 33.3%;
+  }
 }

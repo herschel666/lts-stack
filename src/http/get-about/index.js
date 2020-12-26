@@ -6,19 +6,16 @@
 
 const { html, render, page, components } = require('@architect/views');
 
-const { Page, PageHeader, Heading } = components;
+const { Page, Heading } = components;
 
 /** @returns {ReturnType<html>} */
 const Body = () => html`
-<${Page}>
-    <${PageHeader} />
-    <div>
-      <${Heading} text="About the LTSstack" />
-      <p>
-        Labore Lorem veniam consequat aute veniam excepteur eiusmod anim non
-        sint eiusmod qui eu fugiat.
-      </p>
-    </div>
+  <${Page}>
+    <${Heading} text="About the LTSstack" />
+    <p>
+      Labore Lorem veniam consequat aute veniam excepteur eiusmod anim non
+      sint eiusmod qui eu fugiat.
+    </p>
   </${Page}>
 `;
 

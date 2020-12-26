@@ -1,8 +1,5 @@
 module.exports = {
-  purge: {
-    enabled: process.env.NODE_ENV === 'production',
-    content: ['./src/http/*/index.js', './src/views/components/*.js'],
-  },
+  purge: false,
   future: {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
@@ -10,7 +7,7 @@ module.exports = {
   theme: {
     screens: {
       sm: '320px',
-      md: '480',
+      md: '480px',
       lg: '640px',
       xl: '768px',
     },

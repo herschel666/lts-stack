@@ -9,6 +9,7 @@
 @import 'components/heading.css';
 @import 'components/input.css';
 @import 'components/page.css';
+@import 'components/page-footer.css';
 @import 'components/page-header.css';
 @import 'components/page-title.css';
 @import 'components/slim-content.css';
@@ -16,6 +17,11 @@
 @import 'pages/get-index.css';
 @import 'pages/get-guestbook-000entry-id.css';
 
+html,
 body {
-  overflow-y: scroll;
+  @apply h-full;
+}
+
+body {
+  @apply overflow-y-scroll;
 }
