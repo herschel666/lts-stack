@@ -31,4 +31,5 @@ lts-stack
   GSI1SK **String
 
 @macros
+custom-domain
 herschel666-arc-macros-custom-log-groups
