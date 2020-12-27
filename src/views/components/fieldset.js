@@ -6,7 +6,7 @@ const { html } = require('../lib/html');
  * @param {object} props
  * @param {string} [props.legend]
  * @param {string} props.children
- * @returns {ReturnType<html>}
+ * @returns {string}
  */
 exports.Fieldset = ({ legend: legendText, children }) => html`
   <fieldset>

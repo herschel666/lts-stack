@@ -1,3 +1,3 @@
-import type { vhtml, Component } from '../typings/html';
+export type page = (title: string, body: string) => string;
 
-export type page = (title: string, Body: Component) => ReturnType<typeof vhtml>;
+export type html = typeof String.raw;

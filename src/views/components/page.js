@@ -7,12 +7,12 @@ const { PageFooter } = require('./page-footer.js');
 /**
  * @param {object} props
  * @param {string} props.children
- * @returns {ReturnType<html>}
+ * @returns {string}
  */
 exports.Page = ({ children }) => html`
   <div class="c-page">
-    <${PageHeader} />
+    ${PageHeader()}
     <main class="c-page__main">${children}</main>
-    <${PageFooter} />
+    ${PageFooter()}
   </div>
 `;

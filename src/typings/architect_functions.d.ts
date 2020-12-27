@@ -1,4 +1,5 @@
 import type { DocumentClient } from 'aws-sdk/clients/dynamodb';
+import type { APIGatewayEvent } from 'aws-lambda';
 
 interface ArcTableClient {
   get(
@@ -22,7 +23,7 @@ export interface Data {
 interface Http {
   helpers: {
     url(pathname: string): string;
-    bodyParser<T = Record<string, unknown>>(req: Record<string, unknown>): T;
+    bodyParser<T = Record<string, unknown>>(req: APIGatewayEvent): T;
   };
 }
 interface Arc {
