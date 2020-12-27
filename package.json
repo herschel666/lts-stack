@@ -38,7 +38,7 @@
     "@babel/core": "7.12.10",
     "@babel/preset-env": "7.12.11",
     "@testing-library/dom": "7.29.0",
-    "@types/aws-lambda": "8.10.3",
+    "@types/aws-lambda": "8.10.68",
     "@types/classnames": "2.2.11",
     "@types/jest": "26.0.19",
     "@types/turbolinks": "5.2.0",
