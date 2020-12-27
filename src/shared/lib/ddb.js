@@ -2,7 +2,9 @@
 
 /**
  * @typedef {import('../../typings/architect_functions').Data} ArcData
- * @typedef {import('../../typings/architect_shared').DDB} DDB
+ * @typedef {import('../../typings/architect_shared').GuestbookEntry} GuestbookEntry
+ * @typedef {import('../../typings/architect_shared').GuestbookEntryGuard} GuestbookEntryGuard
+ * @typedef {import('../../typings/architect_shared').ddb} ddb
  */
 
 /** @type {import('../../typings/architect_functions').default} */
@@ -10,7 +12,19 @@ const arc = require('@architect/functions');
 const { nanoid } = require('nanoid');
 
 /**
- * @type {DDB['getGuestbookEntries']}
+ * @type {GuestbookEntryGuard}
+ */
+const isGuestbookEntry = (item) => {
+  return (
+    typeof item.author === 'string' &&
+    typeof item.message === 'string' &&
+    typeof item.createdAt === 'string' &&
+    typeof item.entryId === 'string'
+  );
+};
+
+/**
+ * @type {ddb['getGuestbookEntries']}
  */
 exports.getGuestbookEntries = async () => {
   /** @type {ArcData} */
@@ -30,13 +44,17 @@ exports.getGuestbookEntries = async () => {
     ProjectionExpression: 'entryId, author, message, createdAt',
     scanIndexForward: false,
   };
-  const { Items: guestbookEntries = [] } = await data['lts-stack'].query(query);
+  const { Items: items = [] } = await data['lts-stack'].query(query);
+  /** @type {GuestbookEntry[]} */
+  const guestbookEntries = items
+    .map((item) => (isGuestbookEntry(item) ? item : null))
+    .filter(Boolean);
 
   return guestbookEntries;
 };
 
 /**
- * @type {DDB['getGuestbookEntry']}
+ * @type {ddb['getGuestbookEntry']}
  */
 exports.getGuestbookEntry = async (entryId) => {
   /** @type {ArcData} */
@@ -46,11 +64,11 @@ exports.getGuestbookEntry = async (entryId) => {
     PK: compositeKey,
     SK: compositeKey,
   });
-  return entry;
+  return isGuestbookEntry(entry) ? entry : null;
 };
 
 /**
- * @type {DDB['putGuestbookEntry']}
+ * @type {ddb['putGuestbookEntry']}
  */
 exports.putGuestbookEntry = async (args) => {
   /** @type {ArcData} */

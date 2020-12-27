@@ -3,7 +3,8 @@
 /**
  * @typedef {import('../../typings/aws').APIGatewayEvent} APIGatewayEvent
  * @typedef {import('../../typings/aws').APIGatewayResult} Response
- * @typedef {import('../../typings/architect_shared').DDB} DDB
+ * @typedef {import('../../typings/architect_shared').GuestbookInput} GuestbookInput
+ * @typedef {import('../../typings/architect_shared').ddb} ddb
  *
  * @typedef {{
  *   author?: string;
@@ -12,8 +13,8 @@
  * }} Payload
  */
 
-/** @type {{ ddb: DDB }} */
-const shared = require('@architect/shared');
+/** @type {{ ddb: ddb }} */
+const { ddb } = require('@architect/shared');
 /** @type {import('../../typings/architect_functions').default} */
 const arc = require('@architect/functions');
 
@@ -26,6 +27,7 @@ const payloadKeys = ['author', 'message', 'createdAt'];
  */
 const getPayload = (req) => {
   try {
+    /** @template {Payload} T */
     return arc.http.helpers.bodyParser(req);
   } catch (err) {
     console.log(err);
@@ -47,23 +49,26 @@ const isValidDate = (date) => {
 
 /**
  *
- * @param  {Payload & Record<string, unknown>} payload
- * @returns {boolean}
+ * @param  {Record<string, unknown>} payload
+ * @returns {payload is GuestbookInput}
  */
 const validate = (payload) =>
   Object.entries(payload).reduce(
     /**
      * @param {boolean} prev
-     * @param {[string, string]} value
+     * @param {[string, unknown]} value
      */
     (prev, [key, value]) => {
       let isValid =
         prev &&
-        payloadKeys.includes(key) &&
+        payloadKeys.includes(
+          // @ts-ignore
+          key
+        ) &&
         typeof value === 'string' &&
         value.length > 0;
 
-      if (isValid && key === 'createdAt') {
+      if (isValid && key === 'createdAt' && typeof value === 'string') {
         isValid = isValidDate(value);
       }
       return isValid;
@@ -87,7 +92,11 @@ exports.handler = async (req) => {
 
   if (isValid) {
     try {
-      entryId = await shared.ddb.putGuestbookEntry(payload);
+      entryId = await ddb.putGuestbookEntry({
+        author: payload.author,
+        message: payload.message,
+        createdAt: payload.createdAt,
+      });
     } catch (err) {
       console.log(err);
       statusCode = 500;

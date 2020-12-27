@@ -1,6 +1,6 @@
 // @ts-check
 
-/** @type {import('../typings/architect_shared').DDB} */
 const ddb = require('./lib/ddb');
 
-module.exports = { ddb };
+/** @type {import('../typings/architect_shared').ddb} */
+exports.ddb = ddb;

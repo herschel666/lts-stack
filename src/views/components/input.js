@@ -11,22 +11,22 @@ const { html } = require('../lib/html');
  * @property {string} [data-action]
  * @property {boolean} [required]
  *
- * @typedef {Pick<BaseProps, 'id' | 'label'>} OuterProps
+ * @typedef {Pick<BaseProps, 'id' | 'label'>} InputWrapperProps
  */
 
 /**
- * @typedef {OuterProps & { children: string }} Props
+ * @typedef {InputWrapperProps & { children: string }} Props
  * @param {Props} props
- * @returns {ReturnType<html>}
+ * @returns {string}
  */
-const Outer = ({ children, id, label: labelText }) => html`
+const InputWrapper = ({ children, id, label: labelText }) => html`
   <label for=${id} class="c-input__label"> ${labelText} </label>
   ${children}
 `;
 
 /**
  * @param {BaseProps} props
- * @returns {ReturnType<html>}
+ * @returns {string}
  */
 exports.TextInput = ({
   id,
@@ -35,24 +35,28 @@ exports.TextInput = ({
   ['data-target']: target,
   ['data-action']: action,
   required,
-}) => html`
-  <${Outer} id=${id} label=${labelText}>
-    <input
-      type="text"
-      id=${id}
-      name=${id}
-      placeholder=${placeholder}
-      class="c-input__element"
-      data-target=${target}
-      data-action=${action}
-      required=${required}
-    />
-  </${Outer}>
-`;
+}) => {
+  const children = html`<input
+    type="text"
+    id=${id}
+    name=${id}
+    placeholder=${placeholder}
+    class="c-input__element"
+    data-target=${target}
+    data-action=${action}
+    required=${required}
+  />`;
+
+  return InputWrapper({
+    label: labelText,
+    children,
+    id,
+  });
+};
 
 /**
  * @param {BaseProps} props
- * @returns {ReturnType<html>}
+ * @returns {string}
  */
 exports.TextArea = ({
   id,
@@ -61,8 +65,8 @@ exports.TextArea = ({
   ['data-target']: target,
   ['data-action']: action,
   required,
-}) => html`
-  <${Outer} id=${id} label=${labelText}>
+}) => {
+  const children = html`
     <textarea
       id=${id}
       name=${id}
@@ -73,5 +77,11 @@ exports.TextArea = ({
       data-action=${action}
       required=${required}
     ></textarea>
-  </${Outer}>
-`;
+  `;
+
+  return InputWrapper({
+    label: labelText,
+    children,
+    id,
+  });
+};

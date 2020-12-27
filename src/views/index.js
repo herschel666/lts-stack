@@ -1,6 +1,6 @@
 // @ts-check
 
-const { html, render } = require('./lib/html');
+const { html } = require('./lib/html');
 const { page } = require('./lib/page');
 const { Button } = require('./components/button');
 const { Comment } = require('./components/comment');
@@ -27,4 +27,4 @@ const components = {
   SlimContent,
 };
 
-module.exports = { html, render, page, components };
+module.exports = { html, page, components };

@@ -5,7 +5,7 @@ const { html } = require('../lib/html');
 /** @type {string} */
 const copy = '\u00A9';
 
-/** @returns {ReturnType<html>} */
+/** @returns {string} */
 exports.PageFooter = () => html`
   <footer class="c-page-footer">
     <span class="c-page-footer__copy">${copy} ${new Date().getFullYear()}</span>

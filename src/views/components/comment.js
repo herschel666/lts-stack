@@ -13,7 +13,7 @@ const { html } = require('../lib/html');
 
 /**
  * @param {Pick<Props, 'author' | 'entryId' | 'detail'>} props
- * @returns {ReturnType<html>}
+ * @returns {string}
  */
 const Author = ({ author, entryId, detail }) => {
   const inner = detail
@@ -26,22 +26,29 @@ const Author = ({ author, entryId, detail }) => {
 
 /**
  * @param {Props} props
- * @returns {ReturnType<html>}
+ * @returns {string}
  */
 exports.Comment = ({
   entryId,
-  author,
+  author: authorName,
   message: messageText,
   createdAt,
   detail,
-}) => html`
-  <figure class="c-comment" id="entry-${entryId}">
-    <header class="c-comment__header">
-      <${Author} author=${author} entryId=${entryId} detail=${detail} />
-      <time class="c-comment__time" datetime=${createdAt}>
-        ${format(new Date(createdAt), 'yyyy/MM/dd')}
-      </time>
-    </header>
-    <p class="c-comment__message">${messageText}</p>
-  </figure>
-`;
+}) => {
+  const author = Author({
+    author: authorName,
+    entryId,
+    detail,
+  });
+  const time = format(new Date(createdAt), 'yyyy/MM/dd');
+
+  return html`
+    <figure class="c-comment" id="entry-${entryId}">
+      <header class="c-comment__header">
+        ${author}
+        <time class="c-comment__time" datetime=${createdAt}> ${time} </time>
+      </header>
+      <p class="c-comment__message">${messageText}</p>
+    </figure>
+  `;
+};
