@@ -40,7 +40,7 @@
     "@testing-library/dom": "7.29.1",
     "@types/aws-lambda": "8.10.70",
     "@types/classnames": "2.2.11",
-    "@types/jest": "26.0.19",
+    "@types/jest": "26.0.20",
     "@types/turbolinks": "5.2.0",
     "@types/webpack-env": "1.16.0",
     "@typescript-eslint/eslint-plugin": "4.12.0",
