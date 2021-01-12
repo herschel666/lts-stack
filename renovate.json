@@ -3,5 +3,9 @@
   "devDependencies": {
     "automerge": true
   },
-  "packagePatterns": ["^@architect/"]
+  "packageRules": [
+    {
+      "packagePatterns": ["^@architect/"]
+    }
+  ]
 }
