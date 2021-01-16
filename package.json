@@ -54,7 +54,7 @@
     "core-js": "3.8.2",
     "css-loader": "5.0.1",
     "date-fns": "2.16.1",
-    "eslint": "7.17.0",
+    "eslint": "7.18.0",
     "eslint-config-prettier": "7.1.0",
     "eslint-plugin-prettier": "3.3.1",
     "file-loader": "6.2.0",
