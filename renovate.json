@@ -5,6 +5,7 @@
   },
   "packageRules": [
     {
+      "groupName": "architect",
       "packagePatterns": ["^@architect/"]
     }
   ]
