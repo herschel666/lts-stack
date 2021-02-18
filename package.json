@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "@architect/functions": "3.13.9",
-    "@babel/core": "7.12.16",
-    "@babel/preset-env": "7.12.16",
+    "@babel/core": "7.12.17",
+    "@babel/preset-env": "7.12.17",
     "@testing-library/dom": "7.29.4",
     "@types/aws-lambda": "8.10.72",
     "@types/classnames": "2.2.11",
