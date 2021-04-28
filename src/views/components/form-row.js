@@ -1,6 +1,6 @@
 // @ts-check
 
-const classNames = require('classnames');
+const { default: classNames } = require('classnames');
 
 const { html } = require('../lib/html');
 
