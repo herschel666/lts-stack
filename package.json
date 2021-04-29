@@ -31,7 +31,7 @@
     "stimulus": "2.0.0",
     "tailwindcss": "2.1.2",
     "turbolinks": "5.2.0",
-    "xstate": "4.18.0"
+    "xstate": "4.19.0"
   },
   "devDependencies": {
     "@architect/functions": "3.13.9",
