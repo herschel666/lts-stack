@@ -50,7 +50,7 @@
     "classnames": "2.3.1",
     "concurrently": "6.0.2",
     "copy-webpack-plugin": "8.1.1",
-    "core-js": "3.11.2",
+    "core-js": "3.11.3",
     "css-loader": "5.2.4",
     "date-fns": "2.21.2",
     "eslint": "7.25.0",
