@@ -108,27 +108,27 @@ const machine = createMachine<Context, Events, StateSchema>(
         event.data.message !== '400',
     },
     services: {
-      submitForm: ({ url, author, message }: Context) => async ():
-        | Promise<void>
-        | never => {
-        const createdAt = new Date().toISOString();
-        const response = await fetch(url, {
-          method: 'post',
-          headers: {
-            'content-type': 'application/json',
-          },
-          body: JSON.stringify({ author, message, createdAt }),
-        });
+      submitForm:
+        ({ url, author, message }: Context) =>
+        async (): Promise<void> | never => {
+          const createdAt = new Date().toISOString();
+          const response = await fetch(url, {
+            method: 'post',
+            headers: {
+              'content-type': 'application/json',
+            },
+            body: JSON.stringify({ author, message, createdAt }),
+          });
 
-        if (response.status !== 200) {
-          throw new Error(String(response.status));
-        }
+          if (response.status !== 200) {
+            throw new Error(String(response.status));
+          }
 
-        const { entryId } = await response.json();
-        const hash = entryId ? `#entry-${entryId}` : '';
-        Turbolinks.clearCache();
-        Turbolinks.visit(`./guestbook${hash}`);
-      },
+          const { entryId } = await response.json();
+          const hash = entryId ? `#entry-${entryId}` : '';
+          Turbolinks.clearCache();
+          Turbolinks.visit(`./guestbook${hash}`);
+        },
     },
   }
 );
@@ -144,14 +144,11 @@ export default class extends Controller {
   public constructor(context: StimulusCtx) {
     super(context);
 
-    const formMachine: StateNode<
-      Context,
-      StateSchema,
-      Events
-    > = machine.withContext({
-      ...machine.context,
-      url: this.formTarget.action,
-    });
+    const formMachine: StateNode<Context, StateSchema, Events> =
+      machine.withContext({
+        ...machine.context,
+        url: this.formTarget.action,
+      });
     this.fsmService = interpret<Context, StateSchema, Events>(formMachine);
     this.fsmService.subscribe(this.setFeedback.bind(this));
     this.fsmService.start();
