@@ -34,7 +34,7 @@
     "xstate": "4.19.1"
   },
   "devDependencies": {
-    "@architect/functions": "3.13.11",
+    "@architect/functions": "3.13.12",
     "@babel/core": "7.14.3",
     "@babel/preset-env": "7.14.2",
     "@testing-library/dom": "7.31.0",
