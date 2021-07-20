@@ -26,15 +26,15 @@
   "author": "Emanuel Kluge (https://emanuel-kluge.de/)",
   "license": "MIT",
   "dependencies": {
-    "@architect/architect": "8.5.13",
-    "@architect/sandbox": "3.5.1",
+    "@architect/architect": "8.7.4",
+    "@architect/sandbox": "3.7.4",
     "stimulus": "2.0.0",
     "tailwindcss": "2.2.4",
     "turbolinks": "5.2.0",
     "xstate": "4.19.1"
   },
   "devDependencies": {
-    "@architect/functions": "3.13.12",
+    "@architect/functions": "3.14.2",
     "@babel/core": "7.14.8",
     "@babel/preset-env": "7.14.8",
     "@testing-library/dom": "8.1.0",
